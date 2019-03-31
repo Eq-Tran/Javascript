@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    canvas{border:1px solid black;}
+    
+    </style>
+</head>
+<body>
+    <!-- Sets background for game base on X Y coordinate plane-->
+    <canvas width="1000" height ="800"></canvas> </canvas>
+    <script>
+        var c = document.querySelector("canvas");
+        var ctx = c.getContext("2d");
+
+        //fps monitoring / interval
+        var fps = 1000/60;
+        var timer = setInterval(main, fps);
+
+        // player cube or object
+        var g = {
+            x:c.width/2,
+            y:c.height/2,
+            w:100,
+            h:100,
+            color:"red",
+            vx:0,
+            vy:0,
+
+            draw:function(){
+                ctx.save();
+                    ctx.fillStyle = this.color;
+                    ctx.translate(this.x,this.y);
+                    ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
+                ctx.restore();
+                canJump:false;
+            }
+
+        }
+
+        //Holds all functions central to player cube (moves, etc.)
+        function main()
+        {
+            
+            ctx.clearRect(0,0, c.width,c.height);
+            g.draw();
+            
+            //'w' key functions, moves up or "jumps"
+            if(keys["W"] && g.canJump)
+            {
+                
+                g.canJump = false;
+                g.vy = -25;
+
+            }
+
+            //'D' key functions, moves right
+            if(keys["D"])
+            {
+                g.vx += 1;
+
+            }
+
+            //'A' key functions moves left
+            if(keys["A"])
+            {
+                g.vx += -1;
+
+            }
+
+            // Cube physics ( Velocity, gravity, etc.)
+            g.vx *= .9;
+            g.vy += 1
+            g.x += g.vx;
+            g.y += g.vy;
+
+
+            //Jump loop allows cube to jump freely    
+            while( g.y > c.height -g.h/2)
+            {   
+                
+                g.canJump = true;
+                g.vy=0;
+                g.y--;
+            }
+
+        }
+
+
+        //Key array holds all key functions
+        var keys =[];
+
+
+        //Key activation functions
+        document.addEventListener("keydown",press);
+        function press(e)
+        {
+            //key press
+         keys[String.fromCharCode(e.keyCode)] = true;
+             //console.log(e.keycode);
+
+
+        }
+
+        document.addEventListener("keyup",release);
+        function release(e)
+        {
+             //key release 
+         keys[String.fromCharCode(e.keyCode)] = false;
+             //console.log
+
+
+        }
+
+    </script>
+</body>
+</html>

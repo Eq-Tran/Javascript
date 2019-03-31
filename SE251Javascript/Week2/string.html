@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var body = document.querySelector('body');
+        
+        var myName = "jay";
+        /*
+        var message = '';
+        message += '<div id ="container">';
+        message += 'This is a div ';
+        message += myName;
+        message += '</div>';
+        */
+
+        var message = `<div id="container">This is a div ${myName}</div>`;//string literal
+
+        body.innerHTML = message;
+
+        var container = document.querySelector("#container");
+    
+    </script>
+</body>
+</html>

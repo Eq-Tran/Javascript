@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .magenta {
+            color:magenta;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Heading</h1>
+        <p>This is a <span class="magenta">paragraph</span></p>
+        <p>This is a paragraph</p>
+        <p>This is a paragraph</p>
+        <p class="magenta">This is a paragraph</p>
+        <img src="kingkong.jpg" alt="King Kong">
+    </div>
+    <script>
+        var container = document.getElementById('container');
+        console.log(container);
+        container.style.backgroundColor = "#00ff00";
+        container.style.border = "5px solid black";
+
+        var h1 = document.querySelector('h1');
+        h1.style.fontSize = "48px";
+        h1.innerHTML = "Hi Everyone";
+        h1.className = "magenta";
+
+        var m = document.querySelectorAll('.magenta');
+        console.log(m);
+        m[1].style.fontStyle = "italic";
+
+        var p = document.querySelectorAll('p');
+        p[2].style.color = "yellow";
+
+        var img = document.querySelector('img[alt="King Kong"]');
+        console.log(img);
+        img.src = "rampage.jpg";
+
+
+
+    </script>
+</body>
+</html>

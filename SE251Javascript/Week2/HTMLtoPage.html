@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Week 2 Files</title>
+<style type="text/css">
+	.border{border:1px solid black;
+	margin-bottom:3px;}
+</style>
+</head>
+
+<body>
+</body>
+
+<script type="text/Javascript">
+
+	//Sets var body with the value of the selector body
+	var body = document.querySelector('body');
+	var myString = "";
+
+
+	//Use this Array of objects to complete the assignment.
+	var people =[
+		{first:"Jason", last:"Vorhees", credit:"Friday the 13th"},
+		{first:"Freddy", last:"Krueger", credit:"A Nightmare on Elm Street" },
+		{first:"Roger", last:"Rabbit", credit:"Who Framed Roger Rabbit" },
+		{first:"Kevin", last:"McCallister", credit:"Home Alone" },
+		{first:"Godzilla", last:"King of The Monsters", credit:"Godzilla" },
+		{first:"Buzz", last:"Lightyear", credit:"Toy Story" },
+		{first:"Marion", last:"Cobretti", credit:"Cobra" }
+	]
+
+	for ( var i = 0; i < people.length; i++)
+
+	{	//Opens divs for each indexed object 
+		myString += "<div id='" + i + "' class='border'>";
+		
+		// Iterates through each object printing its index position and the value associated
+		for (value in people[i])
+		{
+
+			
+			//Creates a <p> tag for every object and its property along with their index points
+			myString += "<p>";
+			myString += people[i][value];
+			myString += "</p>";
+			
+
+			
+
+
+
+		}// FOR-IN END
+
+		//Closes div 
+		myString += "</div>"
+
+
+	}//FOR end	
+
+
+	//Prints out to the console 
+	body.innerHTML= myString;
+
+
+
+
+	
+</script>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var body = document.querySelector('body');
+
+        var div = document.createElement('div');
+        div.setAttribute('id', 'container');
+        body.appendChild(div);
+
+        var p = document.createElement('p');
+        div.appendChild(p);
+
+        var message = document.createTextNode('Some words');
+        p.appendChild(message);
+
+    </script>
+</body>
+</html>

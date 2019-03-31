@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Practical</title>
+<style type="text/css">
+	section{
+		
+		margin-bottom:25px;
+	}
+	
+	section section{
+		width:100%;
+		float:left;
+		border:1px solid black;
+	}
+	#main-content section{
+		width:33%;
+		float:left
+	}
+	
+	#main-content{
+	margin-bottom:25px;
+	}
+</style>
+</head>
+<body>
+<div id="main-content">
+<section id="database-analyst-area" >
+<h2>Database Analyst</h2>
+	<h3>First Name:</h3>
+	<div class="first"></div>
+	<h3>Last Name:</h3>
+	<div class="last"></div>
+	<h3>Highest Paid Salary</h3>
+	<div class="analysthighest"></div>
+	<h3>Highest Average Paid Salery</h3>
+	<h3 class="averageanalyst"></h3>
+</section >
+
+<section  id="web-developer-area" >
+<h2>Web Developer</h2>
+	<h3>First Name:</h3>
+	<div class="first"></div>
+	<h3>Last Name:</h3>
+	<div class="last"></div>
+	<h3>Highest Paid Salary</h3>
+	<div class="highest"></div>
+	<h3>Highest Average Paid Salery</h3>
+	<h3 class="average"></h3>
+</section >
+
+<section  id="software-engineer-area">
+<h2>Software Engineer</h2>
+	<h3>First Name:</h3>
+	<div class="first"></div>
+	<h3>Last Name:</h3>
+	<div class="last"></div>
+	<h3>Highest Paid Salary</h3>
+	<div class="highest"></div>
+	<h3>Highest Average Paid Salery</h3>
+	<h3 class="average"></h3>
+</section >
+</div>
+<section  id="search-area">
+	<input type="text" placeholder="First Name" id="first-name" >
+	<input type="text" placeholder="Last Name" id="last-name">
+	<input type="button" id="search-submit" value="search">
+	<section id="search-output">
+	<h2>Search Output</h2>
+	<div class="output">
+		<!--Output search info to here.-->
+	</div>
+	</section>
+</section >
+
+<section  id="list-area">
+	<input type="button" value="List Database Analysts" id="list-database-analyst">
+	<input type="button" value="List Web Developers" id="list-web-developer">
+	<input type="button" value="List Software Engineers" id="list-software-engineer" >
+	<section id="list-output">
+	<h2>List Output</h2>
+		<div class="output">
+			<!--Output list info to here.-->
+		</div>
+	</section>
+</section >
+<script>
+	fetch('http://ict.neit.edu/evanrense/salaries.php')
+	.then(function(response){
+
+		return response.json();
+
+	})
+	.then(function(myJson){
+		var dba = [];
+		var webdev = [];
+		var softeng = [];
+
+		var databaseAnalystAveragesum = 0;
+		var webdevAveragesum = 0;
+		var softengAveragesum = 0;
+
+		
+		var databaseAnalystFirst = document.querySelector("#database-analyst-area .first");
+		var databaseAnalystLast = document.querySelector("#database-analyst-area .last");
+		var databaseAnalystAverage= document.querySelector("#database-analyst-area .averageanalyst");
+		var databaseAnalystHighest = document.querySelector("#database-analyst-area .analysthighest");
+
+
+		var webdevFirst = document.querySelector("#web-developer-area .first");
+		var webdevLast = document.querySelector("#web-developer-area .last");
+		var webdevAverage = document.querySelector("#web-developer-area .average");
+		var webdevHighest = document.querySelector("#web-developer-area .highest");
+		
+		var softengFirst = document.querySelector("#software-engineer-area .first");
+		var softengeLast = document.querySelector("#software-engineer-area .last");
+		var softengAverage = document.querySelector("#software-engineer-area .average");
+		var softengHighest = document.querySelector("#software-engineer-area .highest");
+
+
+		var searchArea = document.querySelector("#search-area");
+		var searchAreaFirst = document.querySelector("#first-name");
+		var searchAreaLast = document.querySelector("#last-name");
+		
+		var searchOutput = document.querySelector("#search-output .output");
+		var listOutput = document.querySelector("#list-output .output");
+
+		var listArea = document.querySelector("#list-area");
+		var listAreaWebDev = document.querySelector("#list-area #list-web-developer");
+		var listAreaDBA = document.querySelector("#list-area #list-database-analyst");
+		var listAreaSoft = document.querySelector("#list-area #list-software-engineer");
+
+		
+
+	for(let i = 0; i < myJson.length; i++){
+		if(myJson[i].jobTitle === "Database Analyst"){
+			dba.push(myJson[i]);
+			databaseAnalystAveragesum += parseFloat(myJson[i].salary);
+			
+			
+			
+
+
+			}
+
+			else if(myJson[i].jobTitle === "Web Developer"){
+
+			webdev.push(myJson[i]);
+			webdevAveragesum += parseFloat(myJson[i].salary);
+			
+			
+
+			}
+
+				else if(myJson[i].jobTitle === "Software Developer"){
+
+				softeng.push(myJson[i]);
+				softengAveragesum += parseFloat(myJson[i].salary);
+		
+				
+
+			}
+			
+		
+	}
+
+	console.log(databaseAnalystAveragesum);
+	console.log(webdevAveragesum);
+	console.log(softengAveragesum);
+
+
+	dba.sort(function(a,b) {return b.salary - a.salary});
+	console.log(dba);
+
+	webdev.sort(function(b,a) {return a.salary - b.salary});
+	console.log(webdev);
+
+	softeng.sort(function(b,a) {return a.salary - b.salary});
+	console.log(softeng);
+
+
+	databaseAnalystAveragesum = databaseAnalystAveragesum / dba.length;
+	
+	
+	webdevAveragesum = webdevAveragesum/ webdev.length;
+
+
+	softengAveragesum = softengAveragesum/ softeng.length;
+
+
+	
+	
+	databaseAnalystFirst.innerHTML = dba[0].name['first'];
+	databaseAnalystLast.innerHTML = dba[0].name['last'];
+	databaseAnalystHighest.innerHTML = dba[0]['salary'];
+	databaseAnalystAverage.innerText = databaseAnalystAveragesum.toFixed(2);
+	document.querySelector("#database-analyst-area .averageanalyst").style.backgroundColor = "green";
+	console.log(databaseAnalystAveragesum);
+	
+	webdevFirst.innerHTML = webdev[0].name['first'];
+	webdevLast.innerHTML = webdev[0].name['last'];
+	webdevHighest.innerHTML = webdev[0]['salary'];
+	webdevAverage.innerText = webdevAveragesum.toFixed(2);
+	
+	console.log(webdevAveragesum)
+
+	softengFirst.innerHTML = softeng[0].name["first"];
+	softengeLast.innerHTML = softeng[0].name["last"];
+	softengHighest.innerHTML = softeng[0]["salary"];
+	softengAverage.innerText = softengAveragesum.toFixed(2);
+	
+	console.log(softengAveragesum);
+
+
+
+
+	
+
+
+
+		searchArea.addEventListener("click", function(e){
+
+			console.log("click");
+			for(let i = 0; i < myJson.length; i++){
+
+			if(myJson[i].name.first === searchAreaFirst.value || myJson[i].name.last === searchAreaLast.value){
+				searchOutput.innerHTML = myJson[i].jobTitle + ": " +myJson[i].name.first + " " + myJson[i].name.last + " " + myJson[i].salary;
+				
+			
+			}
+			
+			}
+
+			
+
+		});
+		console.log(searchArea);
+
+		listAreaDBA.addEventListener("click", function(e){
+
+
+
+			console.log("click");
+
+			for(let i = 0; i < dba.length;i++){
+
+				console.log(dba[i].name);
+				
+				
+				
+					
+						listOutput.innerHTML += '<tr><td><br>' + dba[i].name.first + " " + '</td>' + '<td>' + dba[i].name.last + " " + '</td>' + '<td>' + dba[i].salary + '</td>' + '</br></tr></td>';
+						
+
+			
+			}
+			
+				
+
+		});
+		
+		console.log(dba);
+		console.log(listAreaDBA);
+
+		listAreaWebDev.addEventListener("click", function(e){
+
+
+
+			console.log("click");
+
+			for(let i = 0; i <webdev.length; i++){
+
+				listOutput.innerHTML += '<tr><td><br>' + webdev[i].name.first + " " + '</td>' + '<td>' + webdev[i].name.last + " " + '</td>' + '<td>' + webdev[i].salary + '</td>' + '</br></tr></td>';
+
+			}
+
+
+
+		});
+		console.log(listAreaDBA);
+
+
+		listAreaSoft.addEventListener("click", function(e){
+
+
+			console.log("click");
+			for(let i = 0; i < softeng.length;i++){
+
+
+				listOutput.innerHTML += '<tr><td><br>' + softeng[i].name.first + " " + '</td>' + '<td>' + softeng[i].name.last + " " + '</td>' + '<td>' + softeng[i].salary + '</td>' + '</br></tr></td>';
+
+
+
+			}
+
+
+
+
+
+		});
+		console.log(listAreaDBA);
+
+
+
+	});
+
+
+</script>
+</body>
+</html>
